@@ -16,10 +16,10 @@ class BreadcrumbsRepository extends BaseRepository {
 	}
 	
 	public function all() {
-		$collection = Yii::$app->view->params['breadcrumbs'];
-		if(empty($collection)) {
+		if(empty(Yii::$app->view->params['breadcrumbs'])) {
 			return [];
 		}
+		$collection = Yii::$app->view->params['breadcrumbs'];
 		$collection = $this->correctData($collection);
 		$collection = $this->removeLastUrl($collection);
 		return $this->forgeEntity($collection);
