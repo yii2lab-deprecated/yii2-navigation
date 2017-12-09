@@ -3,6 +3,7 @@
 namespace yii2lab\navigation\domain\entities;
 
 use yii2lab\domain\BaseEntity;
+use yii2module\lang\domain\helpers\LangHelper;
 
 class BreadcrumbsEntity extends BaseEntity {
 	
@@ -18,7 +19,7 @@ class BreadcrumbsEntity extends BaseEntity {
 	}
 	
 	public function setLabel($value) {
-		$this->label = \yii2module\lang\domain\helpers\LangHelper::extract($value);
+		$this->label = LangHelper::extract($value);
 	}
 	
 }
