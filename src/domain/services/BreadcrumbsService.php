@@ -8,7 +8,7 @@ use yii2lab\domain\services\BaseService;
 class BreadcrumbsService extends BaseService {
 
 	public function create($title, $url = null, $options = null) {
-		$entity = $this->domain->factory->entity->create(BreadcrumbsEntity::className(), [
+		$entity = $this->domain->factory->entity->create(BreadcrumbsEntity::class, [
 			'label' => $title,
 			'url' => $url,
 			'options' => $options,
