@@ -4,10 +4,18 @@ namespace yii2lab\navigation\domain\services;
 
 use yii2lab\navigation\domain\entities\BreadcrumbsEntity;
 use yii2lab\domain\services\BaseService;
+use yii2lab\navigation\domain\repositories\memory\BreadcrumbsRepository;
 
+/**
+ * Class BreadcrumbsService
+ *
+ * @package yii2lab\navigation\domain\services
+ * @property BreadcrumbsRepository $repository
+ */
 class BreadcrumbsService extends BaseService {
 
 	public function create($title, $url = null, $options = null) {
+		/** @var BreadcrumbsEntity $entity */
 		$entity = $this->domain->factory->entity->create(BreadcrumbsEntity::class, [
 			'label' => $title,
 			'url' => $url,
