@@ -16,8 +16,6 @@ class AlertEntity extends BaseEntity {
 	protected $type;
 	protected $closable = true;
 	protected $delay = self::DELAY_DEFAULT;
-	protected $address;
-	protected $subject;
 	protected $content;
 	
 }
