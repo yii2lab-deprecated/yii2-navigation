@@ -10,9 +10,11 @@ class Domain extends \yii2lab\domain\Domain {
 		return [
 			'repositories' => [
 				'breadcrumbs' => Driver::MEMORY,
+				'alert' => Driver::SESSION,
 			],
 			'services' => [
 				'breadcrumbs',
+				'alert',
 			],
 		];
 	}
