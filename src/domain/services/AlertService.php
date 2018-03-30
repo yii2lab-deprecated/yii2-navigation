@@ -5,7 +5,7 @@ namespace yii2lab\navigation\domain\services;
 use yii2lab\domain\services\ActiveBaseService;
 use yii2lab\navigation\domain\entities\AlertEntity;
 use yii2lab\navigation\domain\repositories\session\AlertRepository;
-use yii2lab\notify\domain\widgets\Alert;
+use yii2lab\navigation\domain\widgets\Alert;
 
 /**
  * Class AlertService

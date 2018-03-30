@@ -6,7 +6,7 @@ use yii2lab\helpers\ReflectionHelper;
 use yii2lab\domain\repositories\BaseRepository;
 use Yii;
 use yii2lab\navigation\domain\entities\AlertEntity;
-use yii2lab\notify\domain\widgets\Alert;
+use yii2lab\navigation\domain\widgets\Alert;
 
 class AlertRepository extends BaseRepository {
 	
