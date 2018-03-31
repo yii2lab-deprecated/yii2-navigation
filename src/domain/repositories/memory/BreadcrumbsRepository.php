@@ -2,28 +2,11 @@
 
 namespace yii2lab\navigation\domain\repositories\memory;
 
-use yii2lab\navigation\domain\entities\BreadcrumbsEntity;
-use Yii;
-use yii2lab\domain\repositories\BaseRepository;
+use yii2lab\domain\repositories\ActiveArrayRepository;
 
-class BreadcrumbsRepository extends BaseRepository {
-
-	public $removeLastUrl = false;
-
-	public function create(BreadcrumbsEntity $entity) {
-		$entity->validate();
-		Yii::$app->view->params['breadcrumbs'][] = $entity->toArray();
-	}
+class BreadcrumbsRepository extends ActiveArrayRepository {
 	
-	public function all() {
-		if(empty(Yii::$app->view->params['breadcrumbs'])) {
-			return [];
-		}
-		$collection = Yii::$app->view->params['breadcrumbs'];
-		$collection = $this->correctData($collection);
-		$collection = $this->removeLastUrl($collection);
-		return $this->forgeEntity($collection);
-	}
+	public $removeLastUrl = false;
 	
 	private function correctData($collection) {
 		foreach($collection as &$item) {
@@ -34,14 +17,11 @@ class BreadcrumbsRepository extends BaseRepository {
 		}
 		return $collection;
 	}
-
-	private function removeLastUrl($collection) {
-		if($this->removeLastUrl) {
-			$collection = array_values($collection);
-			$lastIndex = count($collection) - 1;
-			$collection[$lastIndex]['url'] = null;
-		}
+	
+	protected function getCollection() {
+		$collection = parent::getCollection();
+		$collection = $this->correctData($collection);
 		return $collection;
 	}
-
+	
 }

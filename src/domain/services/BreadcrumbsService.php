@@ -2,8 +2,7 @@
 
 namespace yii2lab\navigation\domain\services;
 
-use yii2lab\navigation\domain\entities\BreadcrumbsEntity;
-use yii2lab\domain\services\BaseService;
+use yii2lab\domain\services\ActiveBaseService;
 use yii2lab\navigation\domain\repositories\memory\BreadcrumbsRepository;
 
 /**
@@ -12,22 +11,17 @@ use yii2lab\navigation\domain\repositories\memory\BreadcrumbsRepository;
  * @package yii2lab\navigation\domain\services
  * @property BreadcrumbsRepository $repository
  */
-class BreadcrumbsService extends BaseService {
+class BreadcrumbsService extends ActiveBaseService {
 
 	public function create($title, $url = null, $options = null) {
-		/** @var BreadcrumbsEntity $entity */
-		$entity = $this->domain->factory->entity->create(BreadcrumbsEntity::class, [
+		$entity = $this->domain->factory->entity->create('breadcrumbs', [
 			'label' => $title,
 			'url' => $url,
 			'options' => $options,
 		]);
-		$this->repository->create($entity);
+		$this->repository->insert($entity);
 	}
 	
-	public function all() {
-		return $this->repository->all();
-	}
-
 	public function removeLastUrl($value = true) {
 		return $this->repository->removeLastUrl = boolval($value);
 	}
