@@ -7,8 +7,9 @@ use yii2lab\domain\repositories\BaseRepository;
 use Yii;
 use yii2lab\navigation\domain\entities\AlertEntity;
 use yii2lab\navigation\domain\widgets\Alert;
+use yii2lab\navigation\domain\interfaces\repositories\AlertInterface;
 
-class AlertRepository extends BaseRepository {
+class AlertRepository extends BaseRepository implements AlertInterface {
 	
 	public function create(AlertEntity $entity) {
 		$message = serialize($entity->toArray());
