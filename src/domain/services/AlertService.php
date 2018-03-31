@@ -18,7 +18,6 @@ use yii2lab\navigation\domain\widgets\Alert;
 class AlertService extends BaseService implements ReadAllInterface {
 	
 	public function create($content, $type = Alert::TYPE_SUCCESS, $delay = AlertEntity::DELAY_DEFAULT) {
-		/** @var AlertEntity $entity */
 		$entity = $this->repository->forgeEntity([
 			'type' => $type,
 			'content' => $content,
