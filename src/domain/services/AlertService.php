@@ -25,6 +25,9 @@ class AlertService extends ActiveBaseService {
 		$this->repository->create($entity);
 	}
 	
+	/**
+	 * @return null|AlertEntity
+	 */
 	public function fetch() {
 		return $this->repository->fetch();
 	}
