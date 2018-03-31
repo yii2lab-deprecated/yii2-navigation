@@ -3,7 +3,7 @@
 namespace yii2lab\navigation\domain\entities;
 
 use yii2lab\domain\BaseEntity;
-use yii2module\lang\domain\helpers\LangHelper;
+use yii2lab\domain\values\LangValue;
 
 /**
  * @property string $type
@@ -22,12 +22,11 @@ class AlertEntity extends BaseEntity {
 	protected $closable = true;
 	protected $delay = self::DELAY_DEFAULT;
 	
-	public function setSubject($value) {
-		$this->subject = LangHelper::extract($value);
-	}
-	
-	public function setContent($value) {
-		$this->content = LangHelper::extract($value);
+	public function fieldType() {
+		return [
+			'subject' => LangValue::class,
+			'content' => LangValue::class,
+		];
 	}
 	
 }
