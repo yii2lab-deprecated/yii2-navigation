@@ -2,39 +2,33 @@
 
 namespace yii2lab\navigation\domain\repositories\session;
 
-use yii2lab\helpers\ReflectionHelper;
+use yii2lab\domain\traits\ArrayModifyTrait;
+use yii2lab\domain\traits\ArrayReadTrait;
 use yii2lab\domain\repositories\BaseRepository;
 use Yii;
-use yii2lab\navigation\domain\entities\AlertEntity;
-use yii2lab\navigation\domain\widgets\Alert;
 use yii2lab\navigation\domain\interfaces\repositories\AlertInterface;
+
+// todo: сделать из него базовый репозиторий для сессий
 
 class AlertRepository extends BaseRepository implements AlertInterface {
 	
-	public function create(AlertEntity $entity) {
-		$message = serialize($entity->toArray());
-		Yii::$app->session->setFlash($entity->type, $message);
+	use ArrayReadTrait;
+	use ArrayModifyTrait;
+	
+	const TYPE_IN_SESSION = 'alertCollection';
+	
+	protected function setCollection(Array $collection) {
+		$data = serialize($collection);
+		Yii::$app->session->setFlash(self::TYPE_IN_SESSION, $data);
 	}
 	
-	public function fetch() {
-		$typeList = ReflectionHelper::getConstantsValuesByPrefix(Alert::class, 'type');
-		foreach($typeList as $type) {
-			if ($this->has($type)) {
-				$entity = $this->fetchByType($type);
-				return $this->forgeEntity($entity);
-			}
+	protected function getCollection() {
+		$data = Yii::$app->session->getFlash(self::TYPE_IN_SESSION);
+		$collection = unserialize($data);
+		if(!is_array($collection)) {
+			return [];
 		}
-		return null;
+		return $collection;
 	}
 	
-	private function has($type) {
-		return Yii::$app->session->hasFlash($type);
-	}
-	
-	private function fetchByType($type) {
-		$message = Yii::$app->session->getFlash($type);
-		$data = unserialize($message);
-		return $this->forgeEntity($data);
-	}
-
 }

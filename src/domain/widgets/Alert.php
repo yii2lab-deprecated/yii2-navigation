@@ -4,49 +4,72 @@ namespace yii2lab\navigation\domain\widgets;
 
 use Yii;
 use kartik\widgets\Alert as kartikAlert;
+use yii\base\Widget;
 
-/**
- * Extends the \yii\bootstrap\Alert widget with additional styling and auto fade out options.
- *
- * @author Kartik Visweswaran <kartikv2@gmail.com>
- * @since 1.0
- */
-class Alert extends kartikAlert
+class Alert extends Widget
 {
-	/**
-	 * @var bool auto fill data
-	 */
-	public $autoFill = true;
 	
 	/**
-	 * Init widget
+	 * information alert
 	 */
-	public function init()
-	{
-		if(Yii::$app->getResponse()->getStatusCode() != 302) {
-			if($this->autoFill) {
-				$entity = Yii::$domain->navigation->alert->fetch();
-				if($entity) {
-					$this->type = $entity->type;
-					$this->body = $entity->content;
-					$this->title = $entity->subject;
-					$this->delay = $entity->delay;
-				}
-			}
-			if(!empty($this->body)) {
-				parent::init();
-			}
-		}
-	}
-
+	const TYPE_INFO = 'alert-info';
+	/**
+	 * danger/error alert
+	 */
+	const TYPE_DANGER = 'alert-danger';
+	/**
+	 * success alert
+	 */
+	const TYPE_SUCCESS = 'alert-success';
+	/**
+	 * warning alert
+	 */
+	const TYPE_WARNING = 'alert-warning';
+	/**
+	 * primary alert
+	 */
+	const TYPE_PRIMARY = 'bg-primary';
+	/**
+	 * default alert
+	 */
+	const TYPE_DEFAULT = 'well';
+	/**
+	 * custom alert
+	 */
+	const TYPE_CUSTOM = 'alert-custom';
+	
+	public $collection = [];
+	
 	/**
 	 * Runs the widget
 	 */
 	public function run()
 	{
-		if(!empty($this->body)) {
-			parent::run();
-		}
+		$collection = $this->getCollection();
+		echo $this->generateHtml($collection);
 	}
 	
+	private function getCollection() {
+		$collection = $this->collection;
+		if(empty($collection)) {
+			$collection = Yii::$domain->navigation->alert->all();
+		}
+		if(empty($collection)) {
+			$collection = [];
+		}
+		return $collection;
+	}
+	
+	private function generateHtml($collection) {
+		$html = '';
+		foreach($collection as $entity) {
+			$html .= kartikAlert::widget([
+				'type' => $entity->type,
+				'body' => $entity->content,
+				'title' => $entity->subject,
+				'delay' => $entity->delay,
+			]);
+		}
+		return $html;
+	}
 }
