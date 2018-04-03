@@ -13,7 +13,7 @@ class Breadcrumbs extends YiiBreadcrumbs
     public $tag = 'ol';
     
     public function init() {
-    	$collection = Yii::$app->navigation->breadcrumbs->all();
+    	$collection = Yii::$domain->navigation->breadcrumbs->all();
     	$this->links = !empty($collection) ? ArrayHelper::toArray($collection) : [];
 	    $this->homeLink = [
 		    'label' => Html::fa('home'),
