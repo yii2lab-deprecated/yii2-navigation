@@ -6,11 +6,11 @@ use yii2lab\domain\enums\Driver;
 
 /**
  * Class Domain
- *
+ * 
  * @package yii2lab\navigation\domain
- *
- * @property \yii2lab\navigation\domain\services\BreadcrumbsService $breadcrumbs
- * @property \yii2lab\navigation\domain\services\AlertService $alert
+ * @property-read \yii2lab\navigation\domain\interfaces\services\AlertInterface $alert
+ * @property-read \yii2lab\navigation\domain\interfaces\services\BreadcrumbsInterface $breadcrumbs
+ * @property-read \yii2lab\navigation\domain\interfaces\repositories\RepositoriesInterface $repositories
  */
 class Domain extends \yii2lab\domain\Domain {
 	
