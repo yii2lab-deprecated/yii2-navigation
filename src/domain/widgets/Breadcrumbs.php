@@ -5,7 +5,7 @@ namespace yii2lab\navigation\domain\widgets;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\widgets\Breadcrumbs as YiiBreadcrumbs;
-use yii2lab\helpers\yii\Html;
+use yii2lab\extension\yii\helpers\Html;
 
 class Breadcrumbs extends YiiBreadcrumbs
 {
