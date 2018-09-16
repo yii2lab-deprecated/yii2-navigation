@@ -52,7 +52,7 @@ class Alert extends Widget
 	private function getCollection() {
 		$collection = $this->collection;
 		if(empty($collection)) {
-			$collection = Yii::$domain->navigation->alert->all();
+			$collection = \App::$domain->navigation->alert->all();
 		}
 		if(empty($collection)) {
 			$collection = [];
