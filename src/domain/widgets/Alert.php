@@ -2,7 +2,6 @@
 
 namespace yii2lab\navigation\domain\widgets;
 
-use Yii;
 use kartik\widgets\Alert as kartikAlert;
 use yii\base\Widget;
 
